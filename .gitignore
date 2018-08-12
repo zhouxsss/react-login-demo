@@ -1,0 +1,10 @@
+/app/webroot/widget/dist
+/app/dist
+/node_modules
+/npm-debug.log
+/app/logs
+node_modules/**
+.idea/**
+config.json
+package-lock.json
+
