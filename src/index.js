@@ -23,20 +23,22 @@ class Index extends React.Component{
     render() {
         const auth = this.state.auth;
         const authInfo = this.state.authInfo;
-        const PrivateRoute = ({component: Component, authed, ...rest}) => {
+        const PrivateRoute = ({component: Component, authed, authInfo, ...rest}) => {
             return (
                 <Route
                     {...rest}
                     render={(props) => authed === true
-                        ? <Component {...props} />
-                        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />} />
+                        ? <Component {...props} authInfo={authInfo} />
+                        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />} />//render和component??
             )
         }
         return (
             <BrowserRouter>
                 <div>
                     <Route exact path="/" component={App}/>
-                    <Route path="/login"  component={() => <LoginPage onHandleAuth = {this.handleAuth} />}/>
+                    <Route path="/login"  component={route => {
+                        return <LoginPage {...route} onHandleAuth = {this.handleAuth} />
+                    }}/>
                     <PrivateRoute authed={auth} path='/product' component = {Product} authInfo={authInfo} />
                 </div>
             </BrowserRouter>

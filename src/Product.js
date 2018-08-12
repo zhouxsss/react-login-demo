@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Tabs } from 'antd';
 
 
 class Product extends Component {
@@ -7,7 +6,6 @@ class Product extends Component {
         super(props)
     }
     render() {
-        console.log(this.props.location.state)
         const authInfo = this.props.authInfo;
         return (
             <div>{authInfo.userName}</div>

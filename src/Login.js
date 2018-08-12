@@ -11,7 +11,6 @@ class LoginPage extends Component {
         super(props)
     }
     render() {
-        console.log(this.props)
         return (
             <Tabs defaultActiveKey="1">
                 <TabPane tab="登陆" key="1">
