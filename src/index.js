@@ -29,7 +29,9 @@ class Index extends React.Component{
                     {...rest}
                     render={(props) => authed === true
                         ? <Component {...props} authInfo={authInfo} />
-                        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />} />//render和component??
+                        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}>
+                  {this.props.children}
+                </Route>
             )
         }
         return (
@@ -39,7 +41,8 @@ class Index extends React.Component{
                     <Route path="/login"  component={route => {
                         return <LoginPage {...route} onHandleAuth = {this.handleAuth} />
                     }}/>
-                    <PrivateRoute authed={auth} path='/product' component = {Product} authInfo={authInfo} />
+                  <PrivateRoute authed={auth} path='/product' component = {Product} authInfo={authInfo}>
+                  </PrivateRoute>
                 </div>
             </BrowserRouter>
         )
