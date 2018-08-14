@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
 import './index.css';
 import App from './App';
 import LoginPage from './Login';
 import Product from './Product';
 import registerServiceWorker from './registerServiceWorker';
+import Category from "./components/category";
 
 class Index extends React.Component{
     constructor(props){
@@ -35,7 +36,7 @@ class Index extends React.Component{
             )
         }
         return (
-            <BrowserRouter>
+            <Router>
                 <div>
                     <Route exact path="/" component={App}/>
                     <Route path="/login"  component={route => {
@@ -44,7 +45,7 @@ class Index extends React.Component{
                   <PrivateRoute authed={auth} path='/product' component = {Product} authInfo={authInfo}>
                   </PrivateRoute>
                 </div>
-            </BrowserRouter>
+            </Router>
         )
     }
 }
