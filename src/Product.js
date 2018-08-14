@@ -13,12 +13,13 @@ class Product extends Component {
         const authInfo = this.props.authInfo;
         return (
             <div>
-              {authInfo.userName}
-              <Nav/>
-
-              <Switch>
-                <Route path="/product/:category" component={Category}/>
-              </Switch>
+              Welcome, {authInfo.userName}
+              <div>
+                <Nav />
+                <Switch>
+                  <Route path="/product/:category/:subcategory" component={Category}/>
+                </Switch>
+              </div>
             </div>
         );
     }

@@ -5,6 +5,8 @@ class Category extends Component {
     return (
       <div>
         {this.props.match.params.category}
+        >
+        {this.props.match.params.subcategory}
       </div>
     )
   }
