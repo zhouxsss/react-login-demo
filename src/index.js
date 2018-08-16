@@ -1,32 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
+import { createStore } from 'redux'
 import './index.css';
 import App from './App';
 import LoginPage from './Login';
 import Product from './Product';
 import registerServiceWorker from './registerServiceWorker';
-import Category from "./components/category";
+import reducer from './reducer/index'
+
+const store = createStore(reducer);
+const rootEl = document.getElementById('root');
+
 
 class Index extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleAuth = this.handleAuth.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-    this.state = {auth: false, authInfo: {}}
-  }
 
   handleAuth(authInfo) {
-    this.setState({auth: true, authInfo});
+    store.dispatch({ type: 'addAuth', playload: authInfo });
   }
 
   handleLogout() {
-    this.setState({auth: false});
+    store.dispatch({ type: 'removeAuth'});
   }
 
   render() {
-    const auth = this.state.auth;
-    const authInfo = this.state.authInfo;
+    let state = store.getState();
+    console.log(state)
+    const auth = state.auth;
+    const authInfo = state.authInfo;
     const PrivateRoute = ({component: Component, authed, authInfo, ...rest}) => {
       return (
         <Route
@@ -53,7 +54,11 @@ class Index extends React.Component {
   }
 }
 
-ReactDOM.render((
+const render = () => ReactDOM.render((
   <Index/>
-), document.getElementById('root'));
+), rootEl);
+
+render();
+store.subscribe(render);
+
 registerServiceWorker();
